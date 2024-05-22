@@ -1,19 +1,39 @@
-.category-button {
+.header-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 80px 0;
+    background-color: #fff; /* 원하는 배경 색상으로 변경 */
+  }
+  
+  .header {
+    width: 100%;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
+    gap: 10px;
+  }
+  
+  .category-button {
+    font-size: 40px; /* 텍스트 크기를 원하는 크기로 조정 */
+    font-weight: bold;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 15px 25px;
     margin: 5px;
-    border: 1px solid #ccc;
-    background-color: #f0f0f0;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
     user-select: none;
     text-align: center;
+    color: #00ad00;
   }
   
   .category-button:hover {
-    background-color: #e0e0e0;
+    color: #008000; /* 마우스를 올렸을 때 글자 색상 변경 */
   }
   
   .category-button:active {
-    background-color: #d0d0d0;
+    color: #008000; /* 클릭했을 때 글자 색상 유지 */
   }
   

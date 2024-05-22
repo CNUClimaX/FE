@@ -1,13 +1,17 @@
-.header {
-    display: flex;
-    justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
+.header-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #192D5B; /* 원하는 배경 색상으로 변경 */
+  }
+  
+  .header {
+    width: 100%;
   }
   
   .button-container {
     display: flex;
+    justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
     gap: 10px;
   }
   
