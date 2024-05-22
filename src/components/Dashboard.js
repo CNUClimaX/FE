@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, HeatmapLayer } from '@react-google-maps/api';
 import axios from 'axios';
 
 const containerStyle = {
   width: '100%',
-  height: '600px'
+  height: '1500px'
 };
 
 const center = {
@@ -12,20 +12,26 @@ const center = {
   lng: 127.5
 };
 
-const Dashboard = () => {
+const Dashboard = ({ category }) => {
   const [heatmapData, setHeatmapData] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/disaster-data')
+    axios.get(`/api/disaster-data?category=${category}`)
       .then(response => {
         setHeatmapData(response.data);
       });
-  }, []);
+  }, [category]);
 
   return (
-    <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
+    <LoadScript
+      googleMapsApiKey="AIzaSyDuz-EmVBl-jQPPDpExnswSwiwiIsQOPTs"
+      libraries={['visualization']}
+    >
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={8}>
-        <HeatmapLayer data={heatmapData} />
+        <HeatmapLayer data={heatmapData.map(item => ({
+          location: new window.google.maps.LatLng(item.location.lat, item.location.lng),
+          weight: item.weight
+        }))} />
       </GoogleMap>
     </LoadScript>
   );
