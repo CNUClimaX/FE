@@ -6,12 +6,44 @@
   }
   
   .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+  }
+  
+  .logo {
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+    margin-left: 50px;
   }
   
   .button-container {
     display: flex;
     justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
     gap: 10px;
+  }
+  
+  .category-button {
+    font-size: 40px; /* 텍스트 크기를 원하는 크기로 조정 */
+    font-weight: bold;
+    display: inline-block;
+    padding: 15px 25px;
+    margin: 5px;
+    border: none; /* 테두리 제거 */
+    background-color: transparent; /* 배경 제거 */
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    color: white; 
+  }
+  
+  .category-button:hover {
+    color: green; /* 마우스를 올렸을 때 글자 색상 변경 */
+  }
+  
+  .category-button:active {
+    color: green; /* 클릭했을 때 글자 색상 유지 */
   }
   
