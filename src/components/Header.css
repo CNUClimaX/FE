@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+  
