@@ -10,18 +10,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-rows: repeat(10, 1fr); /* 10행 생성 */
   pointer-events: none; /* 그리드가 지도 인터랙션을 방해하지 않도록 설정 */
 }
 
-.grid-row {
-  display: flex;
-  height: 100%;
-}
-
 .grid-cell {
-  flex: 1;
+  position: absolute;
   border: 1px solid rgba(0, 0, 0, 0.2); /* 그리드 셀의 테두리 색상 및 투명도 설정 */
   background-color: rgba(0, 0, 0, 0.1); /* 기본 채도 설정 */
   transition: background-color 0.3s ease; /* 채도 변화를 위한 트랜지션 */

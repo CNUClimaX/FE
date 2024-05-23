@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GoogleMap, LoadScript, HeatmapLayer } from '@react-google-maps/api';
 import axios from 'axios';
-import './Dashboard.css'; // Dashboard.css 파일을 임포트합니다.
+import './Dashboard.css';
 
 const containerStyle = {
   width: '100%',
@@ -10,13 +10,15 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 36.5,
-  lng: 127.5
+  lat: 36.3,
+  lng: 127.8
 };
 
 const Dashboard = ({ category }) => {
   const [heatmapData, setHeatmapData] = useState([]);
   const [map, setMap] = useState(null);
+  const [bounds, setBounds] = useState(null);
+  const [isGridVisible, setIsGridVisible] = useState(true);
 
   useEffect(() => {
     axios.get(`/api/disaster-data?category=${category}`)
@@ -25,13 +27,51 @@ const Dashboard = ({ category }) => {
       });
   }, [category]);
 
-  const handleCellClick = (row, col) => {
+  useEffect(() => {
     if (map) {
-      const lat = 33.0 + (5.0 * (9 - row) / 9.0); // 33.0 ~ 38.0 사이의 위도, 상하 반전
-      const lng = 124.0 + (7.0 * col / 9.0); // 124.0 ~ 131.0 사이의 경도
-      map.panTo({ lat, lng });
-      map.setZoom(10); // 확대 레벨 설정
+      const listener = map.addListener('bounds_changed', () => {
+        setBounds(map.getBounds());
+      });
+      return () => listener.remove();
     }
+  }, [map]);
+
+  const handleCellClick = (lat, lng) => {
+    if (map) {
+      map.panTo({ lat, lng });
+      map.setZoom(10);
+      setIsGridVisible(false);
+    }
+  };
+
+  const generateGrid = () => {
+    if (!bounds || !isGridVisible) return null;
+    const gridCells = [];
+    const boundsNE = bounds.getNorthEast();
+    const boundsSW = bounds.getSouthWest();
+    const latStep = (boundsNE.lat() - boundsSW.lat()) / 10;
+    const lngStep = (boundsNE.lng() - boundsSW.lng()) / 10;
+
+    for (let row = 0; row < 10; row++) {
+      for (let col = 0; col < 10; col++) {
+        const lat = boundsNE.lat() - latStep * row;
+        const lng = boundsSW.lng() + lngStep * col;
+        gridCells.push(
+          <div
+            key={`${row}-${col}`}
+            className="grid-cell"
+            style={{
+              width: `${100 / 10}%`,
+              height: `${100 / 10}%`,
+              top: `${(boundsNE.lat() - lat) / (boundsNE.lat() - boundsSW.lat()) * 100}%`,
+              left: `${(lng - boundsSW.lng()) / (boundsNE.lng() - boundsSW.lng()) * 100}%`
+            }}
+            onClick={() => handleCellClick(lat - latStep / 2, lng + lngStep / 2)}
+          ></div>
+        );
+      }
+    }
+    return gridCells;
   };
 
   return (
@@ -43,7 +83,7 @@ const Dashboard = ({ category }) => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={8}
+          zoom={8.5}
           onLoad={mapInstance => setMap(mapInstance)}
         >
           <HeatmapLayer data={heatmapData.map(item => ({
@@ -53,17 +93,7 @@ const Dashboard = ({ category }) => {
         </GoogleMap>
       </LoadScript>
       <div className="grid-overlay">
-        {[...Array(10)].map((_, row) => (
-          <div key={row} className="grid-row">
-            {[...Array(10)].map((_, col) => (
-              <div
-                key={col}
-                className="grid-cell"
-                onClick={() => handleCellClick(row, col)}
-              ></div>
-            ))}
-          </div>
-        ))}
+        {generateGrid()}
       </div>
     </div>
   );
