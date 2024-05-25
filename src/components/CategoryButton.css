@@ -1,21 +1,4 @@
-.header-container {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 20px 80px 0;
-    background-color: #fff; /* 원하는 배경 색상으로 변경 */
-  }
-  
-  .header {
-    width: 100%;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: flex-end; /* 버튼을 우측에 위치시킵니다 */
-    gap: 10px;
-  }
-  
-  .category-button {
+.category-button {
     font-size: 40px; /* 텍스트 크기를 원하는 크기로 조정 */
     font-weight: bold;
     display: inline-block;
@@ -35,5 +18,13 @@
   
   .category-button:active {
     color: #008000; /* 클릭했을 때 글자 색상 유지 */
+  }
+  
+  .category-button.active {
+    color: #008000; /* 활성화된 버튼의 글자 색상 */
+  }
+  
+  .category-button:not(.active) {
+    color: #fff; /* 비활성화된 버튼의 글자 색상 */
   }
   
