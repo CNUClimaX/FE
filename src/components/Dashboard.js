@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { GoogleMap, LoadScript, HeatmapLayer } from '@react-google-maps/api';
 import axios from 'axios';
+import DetailInfos from './DetailInfos';
 import './Dashboard.css';
 
 const containerStyle = {
@@ -19,6 +20,8 @@ const Dashboard = ({ category }) => {
   const [map, setMap] = useState(null);
   const [bounds, setBounds] = useState(null);
   const [isGridVisible, setIsGridVisible] = useState(true);
+  const [zoomStep, setZoomStep] = useState(0);
+  const [selectedCell, setSelectedCell] = useState(null);
 
   useEffect(() => {
     axios.get(`/api/disaster-data?category=${category}`)
@@ -37,10 +40,16 @@ const Dashboard = ({ category }) => {
   }, [map]);
 
   const handleCellClick = (lat, lng) => {
-    if (map) {
-      map.panTo({ lat, lng });
-      map.setZoom(10);
-      setIsGridVisible(false);
+    if (map && zoomStep < 2) {
+      const zoomIncrements = [10, 13]; // Define the zoom levels for each step
+      const newZoom = zoomIncrements[zoomStep] || 15;
+      const center = new window.google.maps.LatLng(lat, lng);
+      map.panTo(center);
+      map.setZoom(newZoom);
+      setZoomStep((prevStep) => (prevStep + 1));
+    } else { // open a modal window
+        setSelectedCell({ lat, lng });
+        setIsGridVisible(false);
     }
   };
 
@@ -74,6 +83,11 @@ const Dashboard = ({ category }) => {
     return gridCells;
   };
 
+  const closeModal = () => {
+    setSelectedCell(null);
+    setIsGridVisible(true);
+  };
+
   return (
     <div className="map-container">
       <LoadScript
@@ -95,6 +109,12 @@ const Dashboard = ({ category }) => {
       <div className="grid-overlay">
         {generateGrid()}
       </div>
+      {selectedCell && (
+        <div className="modal-overlay">
+          <button className="close-button" onClick={closeModal}>X</button>
+          <DetailInfos />
+        </div>
+      )}
     </div>
   );
 };
