@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CategoryButton from './CategoryButton';
 import './Header.css';
 
-const Header = ({ category, setCategory }) => {
+const Header = () => {
+  const [category, setCategory] = useState('강수량');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/rainfall':
+        setCategory('강수량');
+        break;
+      case '/waterDamage':
+        setCategory('풍수해');
+        break;
+      case '/landslide':
+        setCategory('산사태');
+        break;
+      default:
+        navigate('/rainfall');
+        setCategory('강수량');
+        break;
+    }
+  }, [location, navigate]);
+
   return (
     <div className="header-container">
       <header className="header">

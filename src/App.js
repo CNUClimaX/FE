@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
-import './App.css'; // 필요한 경우 CSS 파일을 임포트합니다.
+import './App.css';
 
-function App() {
-  const [category, setCategory] = useState('강수량');
-
+const App = () => {
   return (
-    <div className="App">
-      <Header category={category} setCategory={setCategory} />
-      <Dashboard category={category} />
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/rainfall" element={<Dashboard key="rainfall" category="강수량" />} />
+        <Route path="/waterDamage" element={<Dashboard key="waterDamage" category="풍수해" />} />
+        <Route path="/landslide" element={<Dashboard key="landslide" category="산사태" />} />
+        <Route path="*" element={<Dashboard key="default" category="강수량" />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
