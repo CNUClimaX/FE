@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, HeatmapLayer } from '@react-google-maps/api';
 import axios from 'axios';
 import DetailInfos from './DetailInfos';
@@ -68,7 +68,7 @@ const Dashboard = ({ category }) => {
         gridCells.push(
           <div
             key={`${row}-${col}`}
-            className="grid-cell"
+            className={`grid-cell ${category}`} // Add category-specific class
             style={{
               width: `${100 / 10}%`,
               height: `${100 / 10}%`,
