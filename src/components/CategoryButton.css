@@ -1,30 +1,48 @@
+/* CategoryButton.css */
 .category-button {
-    font-size: 40px; /* 텍스트 크기를 원하는 크기로 조정 */
-    font-weight: bold;
-    display: inline-block;
-    padding: 15px 25px;
-    margin: 5px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    user-select: none;
-    text-align: center;
-    color: #00ad00;
-  }
-  
-  .category-button:hover {
-    color: #008000; /* 마우스를 올렸을 때 글자 색상 변경 */
-  }
-  
-  .category-button:active {
-    color: #008000; /* 클릭했을 때 글자 색상 유지 */
-  }
-  
-  .category-button.active {
-    color: #008000; /* 활성화된 버튼의 글자 색상 */
-  }
-  
-  .category-button:not(.active) {
-    color: #fff; /* 비활성화된 버튼의 글자 색상 */
-  }
-  
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 15px 25px;
+  margin: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  color: #00ad00;
+}
+
+.category-button:hover {
+  color: #008000;
+}
+
+.category-button:active {
+  color: #008000;
+}
+
+.category-button.active {
+  color: #008000;
+}
+
+.category-button:not(.active) {
+  color: #fff;
+}
+
+.category-button.rainfall {
+  color: lightblue;
+}
+
+.category-button.flood {
+  color: lightcoral;
+}
+
+.category-button.landslide {
+  color: lightgreen;
+}
+
+.category-button.rainfall:hover, 
+.category-button.flood:hover, 
+.category-button.landslide:hover {
+  filter: saturate(2);
+}

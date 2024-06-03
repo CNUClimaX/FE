@@ -37,3 +37,21 @@
 .grid-cell.산사태:active {
   background-color: rgba(0, 255, 0, 0.5); /* 클릭 시 채도 유지 */
 }
+
+.detail-infos {
+  text-align: center;
+  margin: auto;
+}
+
+.graph-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px; /* 높이를 늘려 그래프를 키웁니다 */
+  width: 100%;
+}
+
+.bar-chart {
+  width: 1000px; /* 그래프의 너비를 늘립니다 */
+  height: 500px; /* 그래프의 높이를 키웁니다 */
+}

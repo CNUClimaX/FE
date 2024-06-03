@@ -39,6 +39,13 @@ const Dashboard = ({ category }) => {
     }
   }, [map]);
 
+  useEffect(() => {
+    // Reset zoomStep and other states when category changes
+    setZoomStep(0);
+    setSelectedCell(null);
+    setIsGridVisible(true);
+  }, [category]);
+
   const handleCellClick = (lat, lng) => {
     if (map && zoomStep < 2) {
       const zoomIncrements = [10, 13]; // Define the zoom levels for each step
@@ -112,7 +119,7 @@ const Dashboard = ({ category }) => {
       {selectedCell && (
         <div className="modal-overlay">
           <button className="close-button" onClick={closeModal}>X</button>
-          <DetailInfos />
+          <DetailInfos category={category} />
         </div>
       )}
     </div>
