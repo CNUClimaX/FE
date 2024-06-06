@@ -55,3 +55,12 @@
   width: 1000px; /* 그래프의 너비를 늘립니다 */
   height: 500px; /* 그래프의 높이를 키웁니다 */
 }
+
+.grid-cell {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.grid-cell.highlight-cell {
+  background-color: rgba(1, 155, 0.3); /* Highlight color for Daejeon */
+}

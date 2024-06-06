@@ -2,7 +2,7 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './DetailInfos.css';
 
-const DetailInfos = ({ category }) => {
+const DetailInfos = ({ category, selectedCell, videoURLs, isValidCell }) => {
   const data = [
     { name: 'Monday', value: 15 },
     { name: 'Tuesday', value: 10 },
@@ -13,7 +13,16 @@ const DetailInfos = ({ category }) => {
     { name: 'Sunday', value: 0 },
   ];
 
-  const videoURL = "http://www.utic.go.kr/view/map/openDataCctvStream.jsp?key=27K4jLbMwPAQvxz0K83HFfIl9c15OkGtvGqiK7WvrRAILCIDYX6x8inx0GH0TP7bgdjKxtbI06gGh81qg&cctvid=L280076&cctvName=%25EC%25A4%2591%25EA%25B3%25A1%25EC%259C%25A1%25EA%25B5%2590%25EC%25B0%25A8%25EB%25A1%259C(8%25EB%25B2%2588%25EA%25B5%2590%25EC%25B0%25A8%25EB%25A1%259C)-01&kind=t&cctvip=null&cctvch=null&id=637bef0325205&cctvpasswd=04&cctvport=null";
+  const cellKey = `${selectedCell.lat},${selectedCell.lng}`;
+  const videoURL = videoURLs[cellKey] || null;
+
+  if (!isValidCell) {
+    return (
+      <div className="detail-infos">
+        <h2>해당 지역에 대한 정보는 제공하지 않습니다</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="detail-infos">
@@ -21,10 +30,14 @@ const DetailInfos = ({ category }) => {
       <div className="video-section">
         <div className="video-container">
           <h3>Live CCTV Feed</h3>
-          <video width="640" height="480" controls>
-            <source src={videoURL} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          {videoURL ? (
+            <video width="640" height="480" controls>
+              <source src={videoURL} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <p>선택한 위치에 대한 영상정보가 존재하지 않습니다.</p>
+          )}
         </div>
       </div>
       <div className="graph-section">
