@@ -21,15 +21,15 @@ const dummyData = [
   { location: { lat: 36.3, lng: 127.8 }, weight: 0, category: '강수량' },
   { location: { lat: 36.4, lng: 127.9 }, weight: 0, category: '풍수해' },
   { location: { lat: 36.2, lng: 127.7 }, weight: 0, category: '산사태' },
-  { location: { lat: 36.35063386120811, lng: 127.34327774047847 }, weight: 100, category: '강수량' }, // Daejeon example
+  { location: { lat: 36.35063386120811, lng: 127.35235004425047 }, weight: 100, category: '강수량' }, // Daejeon example
   { location: { lat: 37.46745297346658, lng: 127.0330513000488 }, weight: 0, category: '풍수해' },
   { location: { lat: 35.185649127848336, lng: 129.10122756958006 }, weight: 0, category: '산사태' }
 ];
 
 const videoURLs = {
-  "36.35063386120811,127.34327774047847": "http://cctvsec.ktict.co.kr/9970/4hMr0kyj59zQUuh0Tv8b+ctK/kUSxQWREnnLJWWJeRL9IHlX0Veu1ItOR9Mjb306",
-  "37.46745297346658,127.0330513000488": "http://cctvsec.ktict.co.kr/9973/muzof50ma0nbDM33Zht8mmuUO28iidKbUyX+i91bAl4x1J8q5K8AOPIB00Yykpj8",
-  "35.185649127848336,129.10122756958006": "http://cctvsec.ktict.co.kr/9967/bQD0iEcxnOWtskuKmZ130WyLdeRgoB71smnw9VxEqzbXqXFaaTtxXL6F+osUGCBh"
+  "36.35063386120811,127.35235004425047": "http://cctvsec.ktict.co.kr/9970/4hMr0kyj59zQUuh0Tv8b+ctK/kUSxQWREnnLJWWJeRL9IHlX0Veu1ItOR9Mjb306",
+  "37.46745297346658,127.02250270843504": "http://cctvsec.ktict.co.kr/9973/muzof50ma0nbDM33Zht8mmuUO28iidKbUyX+i91bAl4x1J8q5K8AOPIB00Yykpj8",
+  "35.185649127848336,129.1115358352661": "http://cctvsec.ktict.co.kr/9967/bQD0iEcxnOWtskuKmZ130WyLdeRgoB71smnw9VxEqzbXqXFaaTtxXL6F+osUGCBh"
 };
 
 // Define the bounding polygon for South Korea
