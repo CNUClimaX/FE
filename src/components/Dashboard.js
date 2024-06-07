@@ -173,11 +173,12 @@ const Dashboard = ({ category }) => {
         const lat = boundsNE.lat() - latStep * row;
         const lng = boundsSW.lng() + lngStep * col;
         const cellOpacity = getGridCellOpacity(lat - latStep / 2, lng + lngStep / 2);
+        const isDaejeon = lat > 36.3 - latStep/2 && lat < 36.4 + latStep && lng > 127.3 - lngStep/2 && lng < 127.4 + lngStep/2;
 
         gridCells.push(
           <div
             key={`${row}-${col}`}
-            className={`grid-cell ${category}`}
+            className={`grid-cell ${category} ${category} ${isDaejeon ? 'highlight-cell' : ''}`}
             style={{
               width: `${100 / 10}%`,
               height: `${100 / 10}%`,
@@ -188,6 +189,7 @@ const Dashboard = ({ category }) => {
             onClick={() => handleCellClick(lat - latStep / 2, lng + lngStep / 2)}
           ></div>
         );
+     
       }
     }
     return gridCells;

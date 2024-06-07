@@ -62,5 +62,5 @@
 }
 
 .grid-cell.highlight-cell {
-  background-color: rgba(1, 155, 0.3); /* Highlight color for Daejeon */
+  background-color: rgba(0, 0, 255, 0.3); /* Highlight color for Daejeon */
 }
