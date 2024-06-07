@@ -18,12 +18,12 @@ const libraries = ['visualization'];
 
 // Dummy data for heatmap with higher weight for specific areas
 const dummyData = [
-  { location: { lat: 36.3, lng: 127.8 }, weight: 1, category: '강수량' },
-  { location: { lat: 36.4, lng: 127.9 }, weight: 2, category: '풍수해' },
-  { location: { lat: 36.2, lng: 127.7 }, weight: 3, category: '산사태' },
-  { location: { lat: 36.35063386120811, lng: 127.34327774047847 }, weight: 5, category: '강수량' },
-  { location: { lat: 37.46745297346658, lng: 127.0330513000488 }, weight: 4, category: '풍수해' },
-  { location: { lat: 35.185649127848336, lng: 129.10122756958006 }, weight: 6, category: '산사태' }
+  { location: { lat: 36.3, lng: 127.8 }, weight: 0, category: '강수량' },
+  { location: { lat: 36.4, lng: 127.9 }, weight: 0, category: '풍수해' },
+  { location: { lat: 36.2, lng: 127.7 }, weight: 0, category: '산사태' },
+  { location: { lat: 36.35063386120811, lng: 127.34327774047847 }, weight: 100, category: '강수량' }, // Daejeon example
+  { location: { lat: 37.46745297346658, lng: 127.0330513000488 }, weight: 0, category: '풍수해' },
+  { location: { lat: 35.185649127848336, lng: 129.10122756958006 }, weight: 0, category: '산사태' }
 ];
 
 const videoURLs = {
@@ -173,12 +173,12 @@ const Dashboard = ({ category }) => {
         const lat = boundsNE.lat() - latStep * row;
         const lng = boundsSW.lng() + lngStep * col;
         const cellOpacity = getGridCellOpacity(lat - latStep / 2, lng + lngStep / 2);
-        const isDaejeon = lat > 36.3 - latStep/2 && lat < 36.4 + latStep && lng > 127.3 - lngStep/2 && lng < 127.4 + lngStep/2;
+        const isDaejeon = lat > 36.3 - latStep / 2 && lat < 36.4 + latStep && lng > 127.3 - lngStep / 2 && lng < 127.4 + lngStep / 2;
 
         gridCells.push(
           <div
             key={`${row}-${col}`}
-            className={`grid-cell ${category} ${category} ${isDaejeon ? 'highlight-cell' : ''}`}
+            className={`grid-cell ${category} ${isDaejeon ? `highlight-cell-${category}` : ''}`}
             style={{
               width: `${100 / 10}%`,
               height: `${100 / 10}%`,
@@ -189,7 +189,6 @@ const Dashboard = ({ category }) => {
             onClick={() => handleCellClick(lat - latStep / 2, lng + lngStep / 2)}
           ></div>
         );
-     
       }
     }
     return gridCells;
@@ -234,4 +233,3 @@ const Dashboard = ({ category }) => {
 };
 
 export default Dashboard;
-

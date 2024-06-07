@@ -61,6 +61,14 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.grid-cell.highlight-cell {
-  background-color: rgba(0, 0, 255, 0.3); /* Highlight color for Daejeon */
+.grid-cell.highlight-cell-강수량 {
+  background-color: rgba(0, 0, 255, 0.4); /* Highlight color for 강수량 */
+}
+
+.grid-cell.highlight-cell-풍수해 {
+  background-color: rgba(255, 0, 0, 0.4); /* Highlight color for 풍수해 */
+}
+
+.grid-cell.highlight-cell-산사태 {
+  background-color: rgba(0, 255, 0, 0.4); /* Highlight color for 산사태 */
 }
